@@ -1,0 +1,9 @@
+The following characters are considered as blanks: space, horizontal tabulation, carriage return, line feed and form feed. 
+Blanks are ignored, but they separate adjacent identifiers, literals and keywords that would otherwise be confused as one single identifier, literal or keyword.
+
+Comments
+
+Comments are introduced by the two characters (*, with no intervening blanks, and terminated by the characters *), with no intervening blanks. 
+Comments are treated as blank characters. 
+Comments do not occur inside string or character literals. 
+Nested comments are handled correctly.
