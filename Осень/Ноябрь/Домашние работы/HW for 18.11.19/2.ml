@@ -24,13 +24,13 @@ let rec deg_2 n = if n < 0 then failwith"" else (if n = 0 then 1 else 2 * (deg_2
 let rec string_of_list l = 
 	match l with
  [] -> ""
-|a :: b -> (string_of_list b) ^ a;;
+|a :: b -> (string_of_list b) ^ (string_of_int a);;
 
 let rec from_2 s n = 
-	if n >= (length s) then 0 else
-	(int_of_string (String.make 1 s.[n])) * (deg_2 ((length s) - n - 1)) + (from_2 s (n+1));;
+	if n >= (String.length s) then 0 else
+	(int_of_string (String.make 1 s.[n])) * (deg_2 ((String.length s) - n - 1)) + (from_2 s (n+1));;
 
-let rec deserialize l n = ((from_2 (sublist (rev l) ((length l) - n)) 0),(sublist l n));;
+let rec deserialize l n = ((from_2 (string_of_list (sublist (rev l) ((length l) - n))) 0),(sublist l n));;
 
 
 
