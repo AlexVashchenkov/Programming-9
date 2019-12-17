@@ -1,0 +1,10 @@
+xxxxxxxxxxyyyyyyyyyyyyzzzz 
+                 [(Leaf 'x',10);(Leaf 'y',12);(Leaf 'z', 4)] -> (Node (Leaf 'y',(Node (Leaf 'x',Leaf 'z'))))
+Это y?
+	 / \1             y = 0
+	0   Это x?        x = 10
+	   /    \         z = 11 
+	   0     1
+
+
+[(Leaf 'x',10);(Leaf 'y',12);(Leaf 'z', 4)] -> [(Node (Leaf 'x', Leaf 'z'));(Leaf 'y',12)]

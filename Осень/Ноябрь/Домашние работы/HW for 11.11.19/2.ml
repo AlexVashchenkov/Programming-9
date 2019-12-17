@@ -30,4 +30,5 @@ let rec hafmann lst =
 		let min_pair = plus min1 min2 in
 		(delete (delete lst min1) min2) @ [min_pair]
 	in (if (length lst) = 1 then (fst (get_elem lst 0)) else (hafmann (step lst)));;
- 
+
+hafmann lst;;
