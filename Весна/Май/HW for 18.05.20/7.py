@@ -1,11 +1,6 @@
-str = "aaaaaaaaaaaaaaabbbbbbbvvvvvvggggggddddd"
+import random
 
-def freq(str,s):
-	n = 0
-	for i in range(len(str)):
-		if str[i] == s:
-			n += 1
-	return n
+str = "exal greka cherez reku vidit greka v reke rak sunul greka ruku v reku rak za ruku greku tsap"
 
 def count(l,s):
 	n = 0
@@ -26,20 +21,30 @@ def make_freqs(str):
 	for i in range(len(l)):
 		l[i] = (l[i], (count(str,l[i])))
 	return l
+                                                                     
+def quicksortPairs(l):
+   if len(l) <= 1:
+       return l
+   else:
+       mid = random.choice(l)
+       bigger = list(filter(lambda x: x > mid, l))
+       smaller = list(filter(lambda x: x < mid, l))
+       equal = list(filter(lambda x: x == mid, l))
+       return quicksortPairs(smaller) + equal + quicksortPairs(bigger)		
 
 def plus(p1,p2):
-	[((p1[0],p2[0]),p1[1] + p2[1])]	
+	return ((p1[0],p2[0]),p1[1] + p2[1])
 
 def step(l):
-	min1 = min(l)
-	min2 = min(l.remove(min1))
+	min1 = l[0]
+	min2 = l[1]
 	min_pair = plus(min1,min2)
-	((l.remove(min1)).remove(min2)).append(min_pair)
-
-def haffman(l):
+	return (quicksortPairs(l[2:len(l)].append(min_pair)))
+		
+def hafmann(l):
 	if len(l) == 1:
-		return l[0]
+		return l[0][0]
 	else:
-		(haffman(step(l)))			
-	
-print(haffman(make_freqs(str)))
+		return hafmann(step(l))	
+
+print(hafmann(quicksortPairs(make_freqs(str))))

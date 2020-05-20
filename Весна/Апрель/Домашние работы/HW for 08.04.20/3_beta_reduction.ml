@@ -1,4 +1,4 @@
-type lambda = Var of string | App of lambda * lambda | Abs of string * lambda;;
+(*type lambda = Var of string | App of lambda * lambda | Abs of string * lambda;;*)
 
 type l = Var of string * int | App of l * l | Abs of string * l;;
 
@@ -8,8 +8,9 @@ let rec print_l x =
 |App (y,z) -> print_string "(";(print_l y);(print_string " ");(print_l z);print_string ")"
 |Abs (s,x) -> print_string "(\\";print_string s;print_string ".";(print_l x);print_string ")";;
 
-let str = "(x x)";;
-let tree = App (Var ("x",1), Var ("x",3));;
+let str = "";;
+let tree = App (Abs ("x", Var ("x",3)), Var ("y",5));;
+
 
 let rec find_all tree = 
 	match tree with
@@ -33,6 +34,22 @@ let rec check_free str tree n =
 
 let rec replace b ksi t = 
 	match b with
- Var psi -> if psi = ksi then t else b
+ Var (psi,n) -> if psi <> ksi then b else (match t with
+	Var (l,m) -> Var (l,n)
+       |App (l1,l2) -> t
+       |Abs (s,x) -> t)
+
 |App (p,q) -> (App (replace p ksi t, replace q ksi t))
 |Abs (psi,p) -> if psi = ksi then b else (Abs (psi,(replace p ksi t)));;
+
+let rec step term =
+	match term with
+ Var (s,n) -> Var (s,n)
+|App (t1,t2) -> (match (t1,t2) with
+	(Abs (s,x), t2) -> replace x s t2
+	 |_ -> App (step t1, step t2))
+|Abs (s,x) -> Abs (s, (step x));;
+
+step tree;;
+	
+	 
