@@ -14,3 +14,5 @@ let rec find_all_redex l =
  Var x -> []
 |App (x,y) -> if (check_redex (App (x,y))) then [App (x,y)] @ (find_all_redex x) @ (find_all_redex y) else []
 |Abs (x,y) -> (find_all_redex y);;
+
+
